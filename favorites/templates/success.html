@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+        integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+    <title>Welcome</title>
+</head>
+<body class="p-3">
+    {% if messages %}
+        <ul class="messages">
+            {% for message in messages %}
+            <li {% if message.tags %} class="{{ message.tags }}" {% endif %}>{{ message }}</li>
+            {% endfor %}
+        </ul>
+        {% endif %}
+    <form class="text-info float-right mr-3" action="/wall/log_off" method="POST">
+        {% csrf_token %}
+        <input class="btn btn-link" type="submit" name="log_off" value="log off">
+    </form>
+    <h1>Success! Welcome, {{ user.first_name }}!</h1>
+    <p class="text-success">Successfully registered (or logged in)!</p>
+    <a class="text-info" href="/wall">View CodingDojo Wall</a>
+</body>
+</html>
