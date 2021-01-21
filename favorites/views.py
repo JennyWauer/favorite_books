@@ -56,3 +56,10 @@ def user_login(request):
         else:
             messages.error(request, 'Email/password combination not recognized. Please try again!')
         return redirect("/")
+
+def log_off(request):
+    if request.method == 'GET':
+        return redirect('/wall')
+    if request.method == 'POST':
+        request.session.clear()
+        return redirect('/')
