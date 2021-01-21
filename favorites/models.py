@@ -48,3 +48,10 @@ class User(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
     objects = UserManager()
+
+class Book(models.Model):
+    title = models.CharField(max_length=255)
+    desc = models.TextField()
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+    uploaded_by_id = models.ForeignKey(User, related_name="books", on_delete=models.CASCADE)
