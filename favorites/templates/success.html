@@ -16,6 +16,17 @@
         </form>
         <hr class="bg-dark">
     </header>
-    <a class="text-info" href="/wall">View CodingDojo Wall</a>
+    <form action="/add_book" method="POST">
+        {% csrf_token %}
+        <div>
+            <label for="title">Title</label>
+            <input type="text" name="title">
+        </div>
+        <div>
+            <label for="desc">Description</label>
+            <textarea name="desc" cols="15" rows="5"></textarea>
+        </div>
+        <input type="submit" name="add" value="Add">
+    </form>
 </body>
 </html>
