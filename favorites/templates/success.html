@@ -18,12 +18,12 @@
     </header>
     <form action="/add_book" method="POST">
         {% csrf_token %}
-        <div>
-            <label for="title">Title</label>
+        <div class="form-group">
+            <label for="title" class="col-sm-2 col-form-label">Title</label>
             <input type="text" name="title">
         </div>
-        <div>
-            <label for="desc">Description</label>
+        <div class="form-group">
+            <label for="desc" class="col-sm-2 col-form-label">Description</label>
             <textarea name="desc" cols="15" rows="5"></textarea>
         </div>
         <input type="submit" name="add" value="Add">
