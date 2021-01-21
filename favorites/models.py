@@ -55,3 +55,4 @@ class Book(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
     uploaded_by_id = models.ForeignKey(User, related_name="books", on_delete=models.CASCADE)
+    users_who_like = models.ManyToManyField(User, related_name="liked_books")
