@@ -14,19 +14,19 @@
             {% csrf_token %}
             <input class="btn btn-link" type="submit" name="log_off" value="Log Out">
         </form>
-        <hr class="bg-dark">
     </header>
-    <form action="/add_book" method="POST">
+    <hr class="bg-dark">
+    <form class="w-50 p-3" action="/add_book" method="POST">
         {% csrf_token %}
         <div class="form-group">
-            <label for="title" class="col-sm-2 col-form-label">Title</label>
-            <input type="text" name="title">
+            <label for="title" class="col-sm-2 col-form-label p-1">Title</label>
+            <input type="text" name="title" class="w-25">
         </div>
         <div class="form-group">
-            <label for="desc" class="col-sm-2 col-form-label">Description</label>
-            <textarea name="desc" cols="15" rows="5"></textarea>
+            <label for="desc" class="col-sm-2 col-form-label p-1 align-top">Description</label>
+            <textarea name="desc" cols="20" rows="3" class="w-25"></textarea>
         </div>
-        <input type="submit" name="add" value="Add">
+        <input type="submit" name="add" value="Add" class="form-group ml-1">
     </form>
 </body>
 </html>
