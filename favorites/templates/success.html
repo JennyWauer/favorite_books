@@ -8,19 +8,14 @@
     <title>Welcome</title>
 </head>
 <body class="p-3">
-    {% if messages %}
-        <ul class="messages">
-            {% for message in messages %}
-            <li {% if message.tags %} class="{{ message.tags }}" {% endif %}>{{ message }}</li>
-            {% endfor %}
-        </ul>
-        {% endif %}
-    <form class="text-info float-right mr-3" action="/log_off" method="POST">
-        {% csrf_token %}
-        <input class="btn btn-link" type="submit" name="log_off" value="log off">
-    </form>
-    <h1>Success! Welcome, {{ user.first_name }}!</h1>
-    <p class="text-success">Successfully registered (or logged in)!</p>
+    <header class="d-flex p-2 align-items-baseline">
+        <h1 class="mr-auto">Welcome {{ user.first_name}}</h1>
+        <form action="/log_off" method="POST">
+            {% csrf_token %}
+            <input class="btn btn-link" type="submit" name="log_off" value="Log Out">
+        </form>
+        <hr class="bg-dark">
+    </header>
     <a class="text-info" href="/wall">View CodingDojo Wall</a>
 </body>
 </html>
