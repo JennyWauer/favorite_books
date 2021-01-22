@@ -41,6 +41,9 @@
             <p>{{ book.title }}</p>
             <p>({{ book.uploaded_by.first_name }} {{ book.uploaded_by.last_name }})</p>
             <p>{{ book.desc }}</p>
+            {% if user.id = book.uploaded_by.id}
+            <p>This is one of your favorites</p>
+            
             {% endfor %}
         </div>
     </div>
