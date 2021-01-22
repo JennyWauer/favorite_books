@@ -14,7 +14,8 @@ def books(request):
         user = User.objects.filter(id=request.session['userid'])
         if user:
             context = {
-                "user": user[0]
+                "user": user[0],
+                "books": Book.objects.all()
             }
         return render(request, 'books.html', context)
     return redirect('/login')

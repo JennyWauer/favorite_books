@@ -37,6 +37,11 @@
         </div>
         <div>
             <h2>All Books </h2>
+            {% for book in books %}
+            <p>{{ book.title }}</p>
+            <p>({{ book.uploaded_by.first_name }} {{ book.uploaded_by.last_name }})</p>
+            <p>{{ book.desc }}</p>
+            {% endfor %}
         </div>
     </div>
 
