@@ -59,7 +59,15 @@ def user_login(request):
 
 def log_off(request):
     if request.method == 'GET':
-        return redirect('/wall')
+        return redirect('/books')
     if request.method == 'POST':
         request.session.clear()
         return redirect('/')
+
+def add_book(request):
+    if request.method == 'GET':
+        return redirect('/books')
+    if request.method == 'POST':
+        user_liked = User.objects.get(id=request.POST['user_id'])
+        Book.objects.create(title=request.POST['title'],desc=request.POST['desc'],uploaded_by_id=User.objects.get(id=request.POST['user_id']))
+        return redirect('/books')
