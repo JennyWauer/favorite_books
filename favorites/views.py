@@ -84,3 +84,14 @@ def add_favorite(request):
         book_to_add.users_who_like.add(user_who_added)
         print(book_to_add.users_who_like.all())
         return redirect('/books')
+
+def book_details(request, book_id):
+    if 'userid' in request.session:
+        user = User.objects.filter(id=request.session['userid'])
+        if user:
+            context = {
+                "user": user[0],
+                "books": Book.objects.get(id=book_id),
+            }
+        return render(request, 'book_details.html', context)
+    return redirect('/login')

@@ -38,7 +38,7 @@
         <div class="w-50">
             <h2 class="mt-0">All Books </h2>
             {% for book in books %}
-            <p class="mt-0 mb-1">{{ book.title }}</p>
+            <a href="/books/{{ book.id }}" class="mt-0 mb-1">{{ book.title }}</a>
             <p class="mt-0 mb-1">({{ book.uploaded_by.first_name }} {{ book.uploaded_by.last_name }})</p>
             <p class="mt-0 mb-1">{{ book.desc }}</p>
             {% if book in books_user_likes %}
