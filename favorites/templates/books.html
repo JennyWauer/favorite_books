@@ -35,16 +35,16 @@
                 <input type="submit" name="add" value="Add" class="form-group ml-1">
             </form>
         </div>
-        <div>
-            <h2>All Books </h2>
+        <div class="w-50">
+            <h2 class="mt-0">All Books </h2>
             {% for book in books %}
-            <p>{{ book.title }}</p>
-            <p>({{ book.uploaded_by.first_name }} {{ book.uploaded_by.last_name }})</p>
-            <p>{{ book.desc }}</p>
+            <p class="mt-0 mb-1">{{ book.title }}</p>
+            <p class="mt-0 mb-1">({{ book.uploaded_by.first_name }} {{ book.uploaded_by.last_name }})</p>
+            <p class="mt-0 mb-1">{{ book.desc }}</p>
             {% if book in books_user_likes %}
-            <p>This is one of your favorites</p>
+            <p class="mt-0 mb-1">This is one of your favorites</p>
             {% else %}
-            <form action="/add_favorite" method="POST">
+            <form class="mt-0 mb-1" action="/add_favorite" method="POST">
                 {% csrf_token %}
                 <input type="hidden" name="book_id" value="{{ book.id }}">
                 <input type="hidden" name="user_id" value="{{ user.id }}">
