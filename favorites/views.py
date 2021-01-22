@@ -68,6 +68,7 @@ def add_book(request):
     if request.method == 'GET':
         return redirect('/books')
     if request.method == 'POST':
-        user_liked = User.objects.get(id=request.POST['user_id'])
-        Book.objects.create(title=request.POST['title'],desc=request.POST['desc'],uploaded_by_id=User.objects.get(id=request.POST['user_id']))
+        new_book = Book.objects.create(title=request.POST['title'],desc=request.POST['desc'],uploaded_by=User.objects.get(id=request.POST['user_id']))
+        user_who_like = User.objects.get(id=request.POST['user_id'])
+        new_book.users_who_like.add(user_who_like)
         return redirect('/books')
