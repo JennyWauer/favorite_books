@@ -15,7 +15,8 @@ def books(request):
         if user:
             context = {
                 "user": user[0],
-                "books": Book.objects.all()
+                "books": Book.objects.all(),
+                "books_user_likes": User.objects.get(id=request.session['userid']).liked_books.all(),
             }
         return render(request, 'books.html', context)
     return redirect('/login')

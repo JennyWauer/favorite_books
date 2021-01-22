@@ -41,7 +41,7 @@
             <p>{{ book.title }}</p>
             <p>({{ book.uploaded_by.first_name }} {{ book.uploaded_by.last_name }})</p>
             <p>{{ book.desc }}</p>
-            {% if user.id == book.uploaded_by.id %}
+            {% if book in books_user_likes %}
             <p>This is one of your favorites</p>
             {% else %}
             <form action="/add_favorite" method="POST">
