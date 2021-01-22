@@ -73,3 +73,13 @@ def add_book(request):
         user_who_like = User.objects.get(id=request.POST['user_id'])
         new_book.users_who_like.add(user_who_like)
         return redirect('/books')
+
+def add_favorite(request):
+    if request.method == 'GET':
+        return redirect('/books')
+    if request.method == 'POST':
+        book_to_add = Book.objects.get(id=request.POST['book_id'])
+        user_who_added = User.objects.get(id=request.POST['user_id'])
+        book_to_add.users_who_like.add(user_who_added)
+        print(book_to_add.users_who_like.all())
+        return redirect('/books')

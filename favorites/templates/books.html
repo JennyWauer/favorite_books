@@ -46,6 +46,8 @@
             {% else %}
             <form action="/add_favorite" method="POST">
                 {% csrf_token %}
+                <input type="hidden" name="book_id" value="{{ book.id }}">
+                <input type="hidden" name="user_id" value="{{ user.id }}">
                 <input type="submit" name="add_fav" value="Add to Favorites">
             </form>
             {% endif %}
