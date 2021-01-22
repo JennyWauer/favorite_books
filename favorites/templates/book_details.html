@@ -3,9 +3,16 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Favorite Books</title>
 </head>
 <body>
-    <h1>Working</h1>
+    <header class="d-flex p-2 align-items-baseline">
+        <h1 class="mr-auto">Welcome {{ user.first_name}}</h1>
+        <form action="/log_off" method="POST">
+            {% csrf_token %}
+            <input class="btn btn-link" type="submit" name="log_off" value="Log Out">
+        </form>
+    </header>
+    <hr class="bg-dark">
 </body>
 </html>

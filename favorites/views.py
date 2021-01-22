@@ -91,7 +91,7 @@ def book_details(request, book_id):
         if user:
             context = {
                 "user": user[0],
-                "books": Book.objects.get(id=book_id),
+                "book": Book.objects.get(id=book_id),
             }
         return render(request, 'book_details.html', context)
     return redirect('/login')
