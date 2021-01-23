@@ -15,6 +15,13 @@
             <input class="btn btn-link" type="submit" name="log_off" value="Log Out">
         </form>
     </header>
+    {% if messages %}
+    <ul class="messages mt-2">
+        {% for message in messages %}
+        <li {% if message.tags %} class="{{ message.tags }}" {% endif %}>{{ message }}</li>
+        {% endfor %}
+    </ul>
+    {% endif %}
     <hr class="bg-dark">
     <form action="/update_book" method="POST">
         {% csrf_token %}

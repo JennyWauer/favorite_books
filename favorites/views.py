@@ -70,6 +70,7 @@ def add_book(request):
     if request.method == 'GET':
         return redirect('/books')
     if request.method == 'POST':
+        errors = User.objects.basic_validator(request.POST)
         if len(errors) > 0:
             for key, value in errors.items():
                 messages.error(request, value)
@@ -105,6 +106,7 @@ def update_book(request):
     if request.method == 'GET':
         return redirect('/books')
     if request.method == 'POST':
+        errors = User.objects.basic_validator(request.POST)
         if len(errors) > 0:
             for key, value in errors.items():
                 messages.error(request, value)
