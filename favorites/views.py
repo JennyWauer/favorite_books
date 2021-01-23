@@ -105,3 +105,11 @@ def update_book(request):
         book_to_update.desc = request.POST['desc']
         book_to_update.save()
         return redirect('/books')
+
+def delete(request):
+    if request.method == 'GET':
+        return redirect('/books')
+    if request.method == 'POST':
+        book_to_delete = Book.objects.get(id=request.POST['book_id'])
+        book_to_delete.delete()
+        return redirect('/books')

@@ -28,6 +28,7 @@
     </form>
     <form action="/delete" method="POST">
         {% csrf_token %}
+        <input type="hidden" name="book_id" value="{{ book.id }}">
         <input type="submit" name="delete" value="Delete">
     </form>
     
