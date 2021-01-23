@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,6 +8,7 @@
         integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
     <title>Favorite Books</title>
 </head>
+
 <body class="p-3">
     <header class="d-flex p-2 align-items-baseline">
         <h1 class="mr-auto">Welcome {{ user.first_name}}</h1>
@@ -23,49 +25,60 @@
     </ul>
     {% endif %}
     <hr class="bg-dark">
-    {% if book.uploaded_by.id == user.id %}
-    <form action="/update_book" method="POST">
-        {% csrf_token %}
-        <input type="text" value="{{ book.title }}" name="title">
-        <p>Added by: {{ book.uploaded_by.first_name }} {{ book.uploaded_by.last_name }}</p>
-        <p>Added on: {{ book.created_at }}</p>
-        <p>Last updated on: {{ book.updated_at }}</p>
-        <textarea name="desc"cols="20" rows="3">{{ book.desc }}</textarea>
-        <input type="hidden" name="book_id" value="{{ book.id }}">
-        <input type="submit" name="update" value="Update">
-    </form>
-    <form action="/delete" method="POST">
-        {% csrf_token %}
-        <input type="hidden" name="book_id" value="{{ book.id }}">
-        <input type="submit" name="delete" value="Delete">
-    </form>
-    {% else %}
-    <h3>{{ book.title }}</h3>
-    <p>Added by: {{ book.uploaded_by.first_name }} {{ book.uploaded_by.last_name }}</p>
-    <p>Added on: {{ book.created_at }}</p>
-    <p>Last updated on: {{ book.updated_at }}</p>
-    <p>Description: {{ book.desc }}</p>
-    {% endif %}
-    <h3>Users Who Like This Book:</h3>
-    <ul>
-    {% for liked_user in book.users_who_like.all %}
-        <li>{{ liked_user.first_name }} {{ liked_user.last_name }}</li>
-    </ul>
-    {% endfor %}
-    {% if not user in book.users_who_like.all %}
-    <form class="mt-0 mb-1" action="/add_favorite" method="POST">
-        {% csrf_token %}
-        <input type="hidden" name="book_id" value="{{ book.id }}">
-        <input type="hidden" name="user_id" value="{{ user.id }}">
-        <input type="submit" name="add_fav" value="Add to Favorites">
-    </form>
-    {%elif user in book.users_who_like.all %}
-    <form action="/remove_favorite" method="POST">
-        {% csrf_token %}
-        <input type="hidden" name="book_id" value="{{ book.id }}">
-        <input type="hidden" name="user_id" value="{{ user.id }}">
-        <input type="submit" name="add_fav" value="Remove from Favorites">
-    </form>
-    {% endif %}
+    <div class="d-flex p-2 justify-content-between">
+        <div class="w-50">
+            {% if book.uploaded_by.id == user.id %}
+            <form action="/update_book" method="POST">
+                {% csrf_token %}
+                <input type="text" value="{{ book.title }}" name="title">
+                <p>Added by: {{ book.uploaded_by.first_name }} {{ book.uploaded_by.last_name }}</p>
+                <p>Added on: {{ book.created_at }}</p>
+                <p>Last updated on: {{ book.updated_at }}</p>
+                <textarea name="desc" cols="20" rows="3">{{ book.desc }}</textarea>
+                <input type="hidden" name="book_id" value="{{ book.id }}">
+                <br>
+                <input type="submit" name="update" value="Update">
+            </form>
+            <br>
+            <form action="/delete" method="POST">
+                {% csrf_token %}
+                <input type="hidden" name="book_id" value="{{ book.id }}">
+                <input class="bg-danger text-white" type="submit" name="delete" value="Delete">
+            </form>
+            {% else %}
+            <h3>{{ book.title }}</h3>
+            <p>Added by: {{ book.uploaded_by.first_name }} {{ book.uploaded_by.last_name }}</p>
+            <p>Added on: {{ book.created_at }}</p>
+            <p>Last updated on: {{ book.updated_at }}</p>
+            <p>Description: {{ book.desc }}</p>
+            {% endif %}
+        </div>
+        <div class="w-50">
+            <h3>Users Who Like This Book:</h3>
+            <ul>
+                {% for liked_user in book.users_who_like.all %}
+                <li>{{ liked_user.first_name }} {{ liked_user.last_name }}</li>
+                {% endfor %}
+            </ul>
+            {% if not user in book.users_who_like.all %}
+            <form class="mt-0 mb-1" action="/add_favorite" method="POST">
+                {% csrf_token %}
+                <input type="hidden" name="book_id" value="{{ book.id }}">
+                <input type="hidden" name="user_id" value="{{ user.id }}">
+                <input type="submit" name="add_fav" value="Add to Favorites">
+            </form>
+            {%elif user in book.users_who_like.all %}
+            <form action="/remove_favorite" method="POST">
+                {% csrf_token %}
+                <input type="hidden" name="book_id" value="{{ book.id }}">
+                <input type="hidden" name="user_id" value="{{ user.id }}">
+                <input type="submit" name="add_fav" value="Remove from Favorites">
+            </form>
+            {% endif %}
+        </div>
+
+    </div>
+
 </body>
+
 </html>
