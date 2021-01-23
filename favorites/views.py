@@ -124,3 +124,12 @@ def delete(request):
         book_to_delete = Book.objects.get(id=request.POST['book_id'])
         book_to_delete.delete()
         return redirect('/books')
+
+def remove_favorite(request):
+    if request.method == 'GET':
+        return redirect('/books')
+    if request.method == 'POST':
+        book_to_remove = Book.objects.get(id=request.POST['book_id'])
+        user_to_remove = User.objects.get(id=request.POST['user_id'])
+        book_to_remove.users_who_like.remove(user_to_remove)
+        return redirect('/books')
