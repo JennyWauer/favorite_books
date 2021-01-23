@@ -42,11 +42,11 @@ class UserManager(models.Manager):
 
 class BookManager(models.Manager):
     def book_validator(self, postData):
-        book_errors = {}
-        if len(postData['title']) < 1:
-            book_errors["title"] = "Book title is required"
+        errors = {}
+        if len(postData['title']) <= 1:
+            errors["title"] = "Book title is required"
         if len(postData['desc']) < 5:
-            book_errors["desc"] = "Book description must be at least 5 characters"
+            errors["desc"] = "Book description must be at least 5 characters"
 
 class User(models.Model):
     first_name = models.CharField(max_length=255)

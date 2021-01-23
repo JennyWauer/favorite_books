@@ -69,8 +69,8 @@ def add_book(request):
     if request.method == 'GET':
         return redirect('/books')
     if request.method == 'POST':
-        book_errors = Book.objects.book_validator(request.POST)
-        if len(book_errors) > 0:
+        errors = Book.objects.book_validator(request.POST)
+        if len(errors) > 0:
             for key, value in errors.items():
                 messages.error(request, value)
             return redirect('/books')
