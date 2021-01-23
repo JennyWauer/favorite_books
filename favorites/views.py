@@ -87,7 +87,6 @@ def add_favorite(request):
         book_to_add = Book.objects.get(id=request.POST['book_id'])
         user_who_added = User.objects.get(id=request.POST['user_id'])
         book_to_add.users_who_like.add(user_who_added)
-        print(book_to_add.users_who_like.all())
         return redirect('/books')
 
 def book_details(request, book_id):

@@ -47,6 +47,7 @@ class BookManager(models.Manager):
             errors["title"] = "Book title is required"
         if len(postData['desc']) < 5:
             errors["desc"] = "Book description must be at least 5 characters"
+        return errors
 
 class User(models.Model):
     first_name = models.CharField(max_length=255)
