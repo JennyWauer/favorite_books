@@ -39,6 +39,13 @@ class UserManager(models.Manager):
                 errors["login_password"] = "Password does not match user email"
         return login_errors
 
+    def book_validator(self, postData):
+        book_errors = {}
+        if len(postData['title']) < 1:
+            errors["title"] = "Book title is required"
+        if len(postData['desc']) < 5:
+            errors["desc"] = "Book description must be at least 5 characters"
+
 
 class User(models.Model):
     first_name = models.CharField(max_length=255)
@@ -56,3 +63,4 @@ class Book(models.Model):
     updated_at = models.DateTimeField(auto_now=True)
     uploaded_by = models.ForeignKey(User, related_name="books", on_delete=models.CASCADE)
     users_who_like = models.ManyToManyField(User, related_name="liked_books")
+    objects = UserManager()
