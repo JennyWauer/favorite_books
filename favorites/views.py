@@ -95,3 +95,13 @@ def book_details(request, book_id):
             }
         return render(request, 'book_details.html', context)
     return redirect('/login')
+
+def update_book(request):
+    if request.method == 'GET':
+        return redirect('/books')
+    if request.method == 'POST':
+        book_to_update = Book.objects.get(id=request.POST['book_id'])
+        book_to_update.title = request.POST['title']
+        book_to_update.desc = request.POST['desc']
+        book_to_update.save()
+        return redirect('/books')
