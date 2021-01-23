@@ -55,9 +55,17 @@
         </div>
         <div class="w-50">
             <h3>Users Who Like This Book:</h3>
-            <ul>
+            <ul class="list-inline">
                 {% for liked_user in book.users_who_like.all %}
-                <li>{{ liked_user.first_name }} {{ liked_user.last_name }}</li>
+                <li class="list-inline-item">{{ liked_user.first_name }} {{ liked_user.last_name }}</li>
+                <li class="m-0 w-50 list-inline-item">
+                    <form action="/remove_favorite" method="POST">
+                        {% csrf_token %}
+                        <input type="hidden" name="book_id" value="{{ book.id }}">
+                        <input type="hidden" name="user_id" value="{{ user.id }}">
+                        <input class="btn btn-link" type="submit" name="add_fav" value="Remove from Favorites">
+                    </form>
+                </li>
                 {% endfor %}
             </ul>
             {% if not user in book.users_who_like.all %}
@@ -67,13 +75,7 @@
                 <input type="hidden" name="user_id" value="{{ user.id }}">
                 <input class="btn btn-link" type="submit" name="add_fav" value="Add to Favorites">
             </form>
-            {%elif user in book.users_who_like.all %}
-            <form action="/remove_favorite" method="POST">
-                {% csrf_token %}
-                <input type="hidden" name="book_id" value="{{ book.id }}">
-                <input type="hidden" name="user_id" value="{{ user.id }}">
-                <input class="btn btn-link" type="submit" name="add_fav" value="Remove from Favorites">
-            </form>
+            
             {% endif %}
         </div>
 
