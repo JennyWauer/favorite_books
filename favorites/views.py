@@ -70,10 +70,15 @@ def add_book(request):
     if request.method == 'GET':
         return redirect('/books')
     if request.method == 'POST':
-        new_book = Book.objects.create(title=request.POST['title'],desc=request.POST['desc'],uploaded_by=User.objects.get(id=request.POST['user_id']))
-        user_who_like = User.objects.get(id=request.POST['user_id'])
-        new_book.users_who_like.add(user_who_like)
-        return redirect('/books')
+        if len(errors) > 0:
+            for key, value in errors.items():
+                messages.error(request, value)
+            return redirect('/books')
+        else:
+            new_book = Book.objects.create(title=request.POST['title'],desc=request.POST['desc'],uploaded_by=User.objects.get(id=request.POST['user_id']))
+            user_who_like = User.objects.get(id=request.POST['user_id'])
+            new_book.users_who_like.add(user_who_like)
+            return redirect('/books')
 
 def add_favorite(request):
     if request.method == 'GET':
@@ -100,11 +105,16 @@ def update_book(request):
     if request.method == 'GET':
         return redirect('/books')
     if request.method == 'POST':
-        book_to_update = Book.objects.get(id=request.POST['book_id'])
-        book_to_update.title = request.POST['title']
-        book_to_update.desc = request.POST['desc']
-        book_to_update.save()
-        return redirect('/books')
+        if len(errors) > 0:
+            for key, value in errors.items():
+                messages.error(request, value)
+            return redirect('/books')
+        else:
+            book_to_update = Book.objects.get(id=request.POST['book_id'])
+            book_to_update.title = request.POST['title']
+            book_to_update.desc = request.POST['desc']
+            book_to_update.save()
+            return redirect('/books')
 
 def delete(request):
     if request.method == 'GET':
