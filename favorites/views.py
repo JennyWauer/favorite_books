@@ -41,7 +41,6 @@ def register(request):
                 password=pw_hash
             )
             request.session['userid'] = new_user.id
-            messages.success(request, "User successfully created")
             return redirect('/books')
     return redirect('/')
 
@@ -70,8 +69,8 @@ def add_book(request):
     if request.method == 'GET':
         return redirect('/books')
     if request.method == 'POST':
-        errors = User.objects.basic_validator(request.POST)
-        if len(errors) > 0:
+        book_errors = Book.objects.book_validator(request.POST)
+        if len(book_errors) > 0:
             for key, value in errors.items():
                 messages.error(request, value)
             return redirect('/books')
@@ -106,8 +105,8 @@ def update_book(request):
     if request.method == 'GET':
         return redirect('/books')
     if request.method == 'POST':
-        errors = User.objects.basic_validator(request.POST)
-        if len(errors) > 0:
+        book_errors = Book.objects.book_validator(request.POST)
+        if len(book_errors) > 0:
             for key, value in errors.items():
                 messages.error(request, value)
             return redirect('/books')

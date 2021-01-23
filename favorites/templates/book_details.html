@@ -23,6 +23,7 @@
     </ul>
     {% endif %}
     <hr class="bg-dark">
+    {% if book.uploaded_by.id == user.id %}
     <form action="/update_book" method="POST">
         {% csrf_token %}
         <input type="text" value="{{ book.title }}" name="title">
@@ -38,6 +39,13 @@
         <input type="hidden" name="book_id" value="{{ book.id }}">
         <input type="submit" name="delete" value="Delete">
     </form>
+    {% else %}
+    <h3>{{ book.title }}</h3>
+    <p>Added by: {{ book.uploaded_by.first_name }} {{ book.uploaded_by.last_name }}</p>
+    <p>Added on: {{ book.created_at }}</p>
+    <p>Last updated on: {{ book.updated_at }}</p>
+    <p>Description: {{ book.desc }}</p>
+    {% endif %}
     
 </body>
 </html>
