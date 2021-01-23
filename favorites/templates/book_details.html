@@ -46,6 +46,14 @@
     <p>Last updated on: {{ book.updated_at }}</p>
     <p>Description: {{ book.desc }}</p>
     {% endif %}
+    <h3>Users Who Like This Book:</h3>
+    <ul>
+    {% for liked_user in book.users_who_like.all %}
+    <!-- accessing name wrong -->
+        <li>{{ liked_user.first_name }} {{ liked_user.last_name }}</li>
+    </ul>
+    {% endfor %}
+    
     
 </body>
 </html>
